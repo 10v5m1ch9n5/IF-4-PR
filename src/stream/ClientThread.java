@@ -14,10 +14,12 @@ public class ClientThread extends Thread {
 	
 	private Socket clientSocket;
 	private ThreadManager tm;
+	private int id;
 	
 	ClientThread(Socket s, ThreadManager tm) {
 		this.clientSocket = s;
 		this.tm = tm;
+		this.id = tm.addUser(s);
 	}
 
  	/**
@@ -25,20 +27,19 @@ public class ClientThread extends Thread {
   	* @param clientSocket the client socket
   	**/
 	public void run() {
-    	  try {
-    		BufferedReader socIn = null;
-    		socIn = new BufferedReader(
-    			new InputStreamReader(clientSocket.getInputStream()));    
+    	try {
+    		BufferedReader socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));    
     		PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
     		while (true) {
     		  String line = socIn.readLine();
     		  socOut.println(line);
+			  tm.write(line, id);
     		}
     	} catch (Exception e) {
         	System.err.println("Error in EchoServer:" + e); 
         }
-       }
+    }
   
-  }
+}
 
   
