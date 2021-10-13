@@ -49,8 +49,8 @@ public class EchoClient {
 		
         while (true) {
         	line=stdIn.readLine();
-        	if (line.equals(".")) break;
         	socOut.println(line);
+			if (line.equals(".")) break;
         }
       socOut.close();
       stdIn.close();
