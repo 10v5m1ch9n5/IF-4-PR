@@ -9,18 +9,14 @@ package stream;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
 public class ClientThread
 	extends Thread {
 	
 	private Socket clientSocket;
-	public ArrayList<String> messages = new ArrayList<String>();
-	public String username;
 	
-	ClientThread(Socket s, String username) {
+	ClientThread(Socket s) {
 		this.clientSocket = s;
-		this.username = username;
 	}
 
  	/**
@@ -35,10 +31,7 @@ public class ClientThread
     		PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
     		while (true) {
     		  String line = socIn.readLine();
-			  if(line != "") {
-				  messages.add(this.username + ": " + line + " (thread)");
-			  }
-    		  //socOut.println(line + "thread");
+    		  socOut.println(line);
     		}
     	} catch (Exception e) {
         	System.err.println("Error in EchoServer:" + e); 

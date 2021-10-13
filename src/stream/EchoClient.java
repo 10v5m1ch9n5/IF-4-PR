@@ -24,8 +24,6 @@ public class EchoClient {
         PrintStream socOut = null;
         BufferedReader stdIn = null;
         BufferedReader socIn = null;
-		String username = null;
-		int salon;
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -52,18 +50,8 @@ public class EchoClient {
         while (true) {
         	line=stdIn.readLine();
         	if (line.equals(".")) break;
-			if (line.split(" ")[0].equals("username")) {
-				username = line.split(" ")[1];
-				System.out.println("Votre username : " + username);
-				System.out.println("Coucou " + username);
-				socOut.println("username " + username);
-			} else if (line.split(" ")[0].equals("salon")) {
-				salon = Integer.parseInt(line.split(" ")[1]);
-				// socOut.println("salon " + salon);
-			} else {
-				socOut.println(line);
-				//System.out.println("echo: " + socIn.readLine());
-			}
+        	socOut.println(line);
+        	System.out.println("echo: " + socIn.readLine());
         }
       socOut.close();
       socIn.close();
