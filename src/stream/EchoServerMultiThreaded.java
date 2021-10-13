@@ -19,6 +19,7 @@ public class EchoServerMultiThreaded  {
   	**/
     public static void main(String args[]){ 
 		ServerSocket listenSocket;
+		ThreadManager tm = new ThreadManager();
         
 		if (args.length != 1) {
 			System.out.println("Usage: java EchoServer <EchoServer port>");
@@ -30,7 +31,7 @@ public class EchoServerMultiThreaded  {
 			while (true) {
 				Socket clientSocket = listenSocket.accept();
 				System.out.println("Connexion from:" + clientSocket.getInetAddress());
-				ClientThread ct = new ClientThread(clientSocket);
+				ClientThread ct = new ClientThread(clientSocket, tm);
 				ct.start();
 			}
 		} catch (Exception e) {

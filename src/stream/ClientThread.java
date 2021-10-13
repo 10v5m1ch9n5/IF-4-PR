@@ -10,13 +10,14 @@ package stream;
 import java.io.*;
 import java.net.*;
 
-public class ClientThread
-	extends Thread {
+public class ClientThread extends Thread {
 	
 	private Socket clientSocket;
+	private ThreadManager tm;
 	
-	ClientThread(Socket s) {
+	ClientThread(Socket s, ThreadManager tm) {
 		this.clientSocket = s;
+		this.tm = tm;
 	}
 
  	/**
