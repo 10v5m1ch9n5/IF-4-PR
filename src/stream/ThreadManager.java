@@ -18,6 +18,7 @@ public class ThreadManager {
 		try {
 			for(int i = 0; i < utilisateurs.size(); i++) {
 				if(i == id) continue;
+				System.out.println("Envoi à " + id);
 				PrintStream socOut = new PrintStream(utilisateurs.get(i).getOutputStream());
 				socOut.println(s);
 			}

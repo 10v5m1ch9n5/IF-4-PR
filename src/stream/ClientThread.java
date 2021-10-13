@@ -29,10 +29,8 @@ public class ClientThread extends Thread {
 	public void run() {
     	try {
     		BufferedReader socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));    
-    		PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
     		while (true) {
     		  String line = socIn.readLine();
-    		  socOut.println(line);
 			  tm.write(line, id);
     		}
     	} catch (Exception e) {
