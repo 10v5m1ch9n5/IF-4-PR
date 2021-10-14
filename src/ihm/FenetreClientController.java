@@ -46,8 +46,36 @@ public class FenetreClientController {
     private Button usernameSubmitButton;
 
     @FXML
+    private Button chatroomIDSubmitButton;
+
+    @FXML
+    private TextField chatroomIDTextField;
+
+    @FXML
+    private Text enterChatroomIDText;
+
+    @FXML
     protected void submitUsername() {
         userNameVariable.setText(usernameTextField.getText());
+
+        enterUsernameText.setVisible(false);
+        welcomeToChatClientText.setVisible(false);
+        usernameTextField.setVisible(false);
+        usernameSubmitButton.setVisible(false);
+
+        chatroomIDSubmitButton.setVisible(true);
+        chatroomIDTextField.setVisible(true);
+        enterChatroomIDText.setVisible(true);
+    }
+
+    @FXML
+    protected void submitChatroomID() {
+        chatroomVariable.setText(chatroomIDTextField.getText());
+
+        chatroomIDSubmitButton.setVisible(false);
+        chatroomIDTextField.setVisible(false);
+        enterChatroomIDText.setVisible(false);
+
         sendMessagesButton.setVisible(true);
         chatClientExample.setVisible(true);
         chatroomText.setVisible(true);
@@ -56,10 +84,6 @@ public class FenetreClientController {
         sendMessagesTextbox.setVisible(true);
         userNameText.setVisible(true);
         userNameVariable.setVisible(true);
-        enterUsernameText.setVisible(false);
-        welcomeToChatClientText.setVisible(false);
-        usernameTextField.setVisible(false);
-        usernameSubmitButton.setVisible(false);
     }
 
     @FXML

@@ -64,12 +64,20 @@
             </Text>
             <TextArea id="messagesRecus" fx:id="recievedMessagesTextbox" editable="false" layoutX="83.0" layoutY="86.0" prefHeight="236.0" prefWidth="474.0" promptText="Recieved Messages" visible="false" />
             <TextField id="messageEnvoyer" fx:id="sendMessagesTextbox" layoutX="83.0" layoutY="338.0" prefHeight="26.0" prefWidth="402.0" promptText="Enter Your Message" visible="false" />
-            <Button id="envoyerButton" onAction="#sendMessage" fx:id="sendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Envoyer" visible="false" />
-            <Text id="usernameTitle" fx:id="userNameText" layoutX="83.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" visible="false" />
-            <Text id="username" fx:id="userNameVariable" layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" visible="false" />
-            <Text id="chatroomTitle" fx:id="chatroomText" layoutX="471.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chatroom: " visible="false" />
-            <Text id="chatroom" fx:id="chatroomVariable" layoutX="530.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr." visible="false" />
-      </children>
+            <Button id="envoyerButton" onAction="#sendMessage" fx:id="sendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Send" visible="false" />
+            <Text id="usernameTitle" fx:id="userNameText" layoutX="83.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" visible="false" />
+            <Text id="username" fx:id="userNameVariable" layoutX="147.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" visible="false" />
+            <Text id="chatroomTitle" fx:id="chatroomText" layoutX="83.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chatroom: " visible="false" />
+            <Text id="chatroom" fx:id="chatroomVariable" layoutX="147.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr." visible="false" />
+            <Text id="enterChatroomIDText" fx:id="enterChatroomIDText" layoutX="152.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter A Chatroom ID:" textAlignment="CENTER" visible="false" >
+                <font>
+                    <Font name="System Bold" size="25.0" />
+                </font>
+            </Text>
+            <TextField id="chatroomIDTextField" fx:id="chatroomIDTextField" alignment="CENTER" layoutX="209.0" layoutY="233.0" promptText="chatroom ID" visible="false" />
+            <Button id="chatroomIDSubmitButton" onAction="#submitChatroomID" fx:id="chatroomIDSubmitButton" layoutX="372.0" layoutY="233.0" mnemonicParsing="false" text="Submit" visible="false"  />
+
+        </children>
     </AnchorPane>
   </children>
 </VBox>
