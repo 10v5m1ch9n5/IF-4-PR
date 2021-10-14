@@ -13,6 +13,9 @@ public class FenetreClient extends Application {
         Scene scene = new Scene(fxmlloader.load());
 
         stage.setTitle("ChatClient");
+
+
+
         stage.setScene(scene);
         stage.show();
     }

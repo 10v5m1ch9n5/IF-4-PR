@@ -41,15 +41,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="chatClient" fx:id="chatClientExample" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="chatClient" fx:id="chatClientExample" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.FenetreClientController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
             <Text id="title" layoutX="226.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ChatClient" textAlignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="38.0" />
@@ -57,7 +52,7 @@
             </Text>
             <TextArea id="messagesRecus" fx:id="recievedMessagesTextbox" editable="false" layoutX="83.0" layoutY="86.0" prefHeight="236.0" prefWidth="474.0" promptText="Recieved Messages" />
             <TextField id="messageEnvoyer" fx:id="sendMessagesTextbox" layoutX="83.0" layoutY="338.0" prefHeight="26.0" prefWidth="402.0" promptText="Enter Your Message" />
-            <Button id="envoyerButton" fx:id="SendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Envoyer" />
+            <Button id="envoyerButton" onAction="#sendMessage" fx:id="SendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Envoyer" />
             <Text id="usernameTitle" fx:id="userNameText" layoutX="83.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
             <Text id="username" fx:id="userNameVariable" layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" />
             <Text id="chatroomTitle" fx:id="chatroomText" layoutX="471.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chatroom: " />

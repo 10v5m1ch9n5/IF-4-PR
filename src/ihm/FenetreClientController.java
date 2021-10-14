@@ -33,4 +33,11 @@ public class FenetreClientController {
     @FXML
     private Text userNameVariable;
 
+    @FXML
+    protected void sendMessage() {
+        String message = sendMessagesTextbox.getText();
+        sendMessagesTextbox.setText("");
+        recievedMessagesTextbox.appendText(message + "\n");
+    }
+
 }
