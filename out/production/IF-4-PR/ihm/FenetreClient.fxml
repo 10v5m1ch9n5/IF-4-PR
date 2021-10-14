@@ -44,19 +44,31 @@
 <VBox id="chatClient" fx:id="chatClientExample" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.FenetreClientController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Text id="title" layoutX="226.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ChatClient" textAlignment="CENTER">
+        <children>
+            <Text id="enterUsernameText" fx:id="enterUsernameText" layoutX="152.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter Your Username:" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="25.0" />
+                </font>
+            </Text>
+            <Text id="welcomeToChatClientText" fx:id="welcomeToChatClientText" layoutX="25.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to ChatClient!" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold Italic" size="53.0" />
+                </font>
+            </Text>
+            <TextField id="usernameTextField" fx:id="usernameTextField" alignment="CENTER" layoutX="209.0" layoutY="233.0" promptText="username" />
+            <Button id="usernameSubmitButton" fx:id="usernameSubmitButton" onAction="#submitUsername" layoutX="372.0" layoutY="233.0" mnemonicParsing="false" text="Submit" />
+            <Text id="title" layoutX="226.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ChatClient" textAlignment="CENTER" visible="false">
                <font>
                   <Font name="System Bold Italic" size="38.0" />
                </font>
             </Text>
-            <TextArea id="messagesRecus" fx:id="recievedMessagesTextbox" editable="false" layoutX="83.0" layoutY="86.0" prefHeight="236.0" prefWidth="474.0" promptText="Recieved Messages" />
-            <TextField id="messageEnvoyer" fx:id="sendMessagesTextbox" layoutX="83.0" layoutY="338.0" prefHeight="26.0" prefWidth="402.0" promptText="Enter Your Message" />
-            <Button id="envoyerButton" onAction="#sendMessage" fx:id="SendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Envoyer" />
-            <Text id="usernameTitle" fx:id="userNameText" layoutX="83.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-            <Text id="username" fx:id="userNameVariable" layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" />
-            <Text id="chatroomTitle" fx:id="chatroomText" layoutX="471.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chatroom: " />
-            <Text id="chatroom" fx:id="chatroomVariable" layoutX="530.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr." />
+            <TextArea id="messagesRecus" fx:id="recievedMessagesTextbox" editable="false" layoutX="83.0" layoutY="86.0" prefHeight="236.0" prefWidth="474.0" promptText="Recieved Messages" visible="false" />
+            <TextField id="messageEnvoyer" fx:id="sendMessagesTextbox" layoutX="83.0" layoutY="338.0" prefHeight="26.0" prefWidth="402.0" promptText="Enter Your Message" visible="false" />
+            <Button id="envoyerButton" onAction="#sendMessage" fx:id="sendMessagesButton" layoutX="500.0" layoutY="337.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Envoyer" visible="false" />
+            <Text id="usernameTitle" fx:id="userNameText" layoutX="83.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" visible="false" />
+            <Text id="username" fx:id="userNameVariable" layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" visible="false" />
+            <Text id="chatroomTitle" fx:id="chatroomText" layoutX="471.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chatroom: " visible="false" />
+            <Text id="chatroom" fx:id="chatroomVariable" layoutX="530.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr." visible="false" />
       </children>
     </AnchorPane>
   </children>
