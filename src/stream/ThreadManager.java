@@ -18,9 +18,9 @@ public class ThreadManager {
 		pendingMessages.add(s);
 		try {
 			for(String usr : utilisateurs.keySet()) {
-				if(usr == username) continue;
+				if(Objects.equals(usr, username)) continue;
 				System.out.println("Envoi à " + usr);
-				PrintStream socOut = new PrintStream(utilisateurs.get(i).getOutputStream());
+				PrintStream socOut = new PrintStream(utilisateurs.get(usr).getOutputStream());
 				socOut.println(s);
 			}
 		} catch(Exception e) {
@@ -36,8 +36,8 @@ public class ThreadManager {
 		utilisateurs.put(username, s);
 	}
 	
-	public void rmUser(int id) {
-		utilisateurs.remove(id);
+	public void rmUser(String username) {
+		utilisateurs.remove(username);
 	}
 	
 	public String getMessage() {

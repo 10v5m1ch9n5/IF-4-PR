@@ -38,8 +38,7 @@ public class EchoClient {
             System.err.println("Don't know about host:" + args[0]);
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for "
-                               + "the connection to:"+ args[0]);
+            System.err.println("Couldn't get I/O for " + "the connection to:"+ args[0]);
             System.exit(1);
         }
                              

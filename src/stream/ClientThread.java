@@ -14,7 +14,6 @@ public class ClientThread extends Thread {
 	
 	private Socket clientSocket;
 	private ThreadManager tm;
-	// private int id;
 	private String username;
 	
 	
@@ -38,8 +37,8 @@ public class ClientThread extends Thread {
 			
     		while (true) {
     		    String line = socIn.readLine();
-			    if (line.equals(".")) { tm.rmUser(id); break; }
-			    tm.write(username + ": " + line, id);
+			    if (line.equals(".")) { tm.rmUser(username); break; }
+			    tm.write(username + ": " + line, username);
     		}
 			socIn.close();
 			clientSocket.close();
