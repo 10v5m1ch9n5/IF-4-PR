@@ -38,8 +38,7 @@ public class EchoClient {
             System.err.println("Don't know about host:" + args[0]);
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for "
-                               + "the connection to:"+ args[0]);
+            System.err.println("Couldn't get I/O for " + "the connection to:"+ args[0]);
             System.exit(1);
         }
                              
@@ -49,8 +48,8 @@ public class EchoClient {
 		
         while (true) {
         	line=stdIn.readLine();
-        	if (line.equals(".")) break;
         	socOut.println(line);
+			if (line.equals(".")) break;
         }
       socOut.close();
       stdIn.close();

@@ -6,20 +6,21 @@ import java.util.*;
 
 public class ThreadManager {
 	private ArrayList<String> pendingMessages;
-	private ArrayList<Socket> utilisateurs;
+	// private ArrayList<Socket> utilisateurs;
+	private HashMap<String,Socket> utilisateurs;
 	
 	ThreadManager() {
 		pendingMessages = new ArrayList<String>();
-		utilisateurs = new ArrayList<Socket>();
+		utilisateurs = new HashMap<String,Socket>();
 	}
 	
-	public void write(String s, int id) {
+	public void write(String s, String username) {
 		pendingMessages.add(s);
 		try {
-			for(int i = 0; i < utilisateurs.size(); i++) {
-				if(i == id) continue;
-				System.out.println("Envoi à " + id);
-				PrintStream socOut = new PrintStream(utilisateurs.get(i).getOutputStream());
+			for(String usr : utilisateurs.keySet()) {
+				if(Objects.equals(usr, username)) continue;
+				System.out.println("Envoi à " + usr);
+				PrintStream socOut = new PrintStream(utilisateurs.get(usr).getOutputStream());
 				socOut.println(s);
 			}
 		} catch(Exception e) {
@@ -31,13 +32,12 @@ public class ThreadManager {
 		return !pendingMessages.isEmpty();
 	}
 	
-	public int addUser(Socket s) {
-		utilisateurs.add(s);
-		return utilisateurs.size()-1;
+	public void addUser(Socket s, String username) {
+		utilisateurs.put(username, s);
 	}
 	
-	public void rmUser(int id) {
-		utilisateurs.remove(id);
+	public void rmUser(String username) {
+		utilisateurs.remove(username);
 	}
 	
 	public String getMessage() {

@@ -15,11 +15,9 @@ public class ClientPrintThread extends Thread {
 			BufferedReader socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			String line;
 			while(true) {
-				System.out.println("recu: " + socIn.readLine());
+				line = socIn.readLine();
+				System.out.println(line);
 			}
-			//socIn.close();
-				
-			
 		} catch(Exception e) {
 			System.err.println(e);
 		}
