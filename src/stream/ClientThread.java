@@ -15,6 +15,7 @@ public class ClientThread extends Thread {
 	private Socket clientSocket;
 	private ThreadManager tm;
 	private String username;
+	private String idSalle;
 	
 	
 	ClientThread(Socket s, ThreadManager tm) {
@@ -33,7 +34,10 @@ public class ClientThread extends Thread {
 			socOut.println("Entrez votre nom d'utilisateur :");
 			username = socIn.readLine();
 			socOut.println("Bienvenue, " + username + ".");
-			tm.addUser(clientSocket, username);
+			socOut.println("Entrez votre idSalle :");
+			idSalle = socIn.readLine();
+			socOut.println("Vous \u00EAtes dans la salle : " + idSalle + ".");
+			tm.addUser(clientSocket, username, idSalle);
 			
     		while (true) {
     		    String line = socIn.readLine();
