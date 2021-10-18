@@ -90,7 +90,7 @@ public class FenetreClientController {
     protected void sendMessage() {
         String message = sendMessagesTextbox.getText();
         sendMessagesTextbox.setText("");
-        recievedMessagesTextbox.appendText(message + "\n");
+        recievedMessagesTextbox.appendText( userNameVariable.getText() + ": "+ message + "\n");
     }
 
 }
