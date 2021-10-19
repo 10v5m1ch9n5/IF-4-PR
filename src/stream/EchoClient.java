@@ -8,13 +8,16 @@ package stream;
 
 import java.io.*;
 import java.net.*;
+import java.util.Observable;
+import java.util.Observer;
 
+public class EchoClient implements Observer {
+    @Override
+    public void update(Observable o, Object arg) {
 
+    }
 
-public class EchoClient {
-
- 
-  /**
+    /**
   *  main method
   *  accepts a connection, receives a message from client then sends an echo to the client
   **/
@@ -23,6 +26,7 @@ public class EchoClient {
         Socket echoSocket = null;
         PrintStream socOut = null;
         BufferedReader stdIn = null;
+        String msg = "";
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -43,8 +47,8 @@ public class EchoClient {
         }
                              
         String line;
-		ClientPrintThread cpt = new ClientPrintThread(echoSocket);
-		cpt.start();
+		//ClientPrintThread cpt = new ClientPrintThread(echoSocket);
+		//cpt.start();
 		
         while (true) {
         	line=stdIn.readLine();

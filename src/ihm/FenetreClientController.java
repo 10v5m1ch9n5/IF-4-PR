@@ -1,13 +1,17 @@
 package ihm;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import stream.EchoClient;
 
 public class FenetreClientController {
+
+    private EchoClient echoCLient = new EchoClient();
 
     @FXML
     private Button sendMessagesButton;
@@ -66,6 +70,8 @@ public class FenetreClientController {
         chatroomIDSubmitButton.setVisible(true);
         chatroomIDTextField.setVisible(true);
         enterChatroomIDText.setVisible(true);
+
+        FenetreClient.sendMessage(userNameVariable.getText());
     }
 
     @FXML
@@ -84,6 +90,11 @@ public class FenetreClientController {
         sendMessagesTextbox.setVisible(true);
         userNameText.setVisible(true);
         userNameVariable.setVisible(true);
+
+        FenetreClient.sendMessage(chatroomVariable.getText());
+        FenetreClient.startListen();
+
+        recievedMessagesTextbox.setText("");
     }
 
     @FXML
@@ -91,6 +102,16 @@ public class FenetreClientController {
         String message = sendMessagesTextbox.getText();
         sendMessagesTextbox.setText("");
         recievedMessagesTextbox.appendText( userNameVariable.getText() + ": "+ message + "\n");
+        FenetreClient.sendMessage(userNameVariable.getText() + ": "+ message + "\n");
+    }
+
+    public void recieveMessage(String message) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                recievedMessagesTextbox.appendText( message + "\n");
+            }
+        });
     }
 
 }

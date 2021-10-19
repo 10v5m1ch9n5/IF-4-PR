@@ -12,25 +12,45 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Observable;
+import java.util.Observer;
 
 import stream.ClientPrintThread;
 
-public class FenetreClient extends Application {
+public class FenetreClient extends Application implements Observer {
+
+    public static Socket echoSocket = null;
+    public static PrintStream socOut = null;
+    public static BufferedReader stdIn = null;
+    public static FenetreClientController controller;
+    public static Thread listeningthread;
+    public  static ClientPrintThread cpt;
+
+    public static void sendMessage(String message) {
+        System.out.println("Message envoyé: " + message);
+        socOut.println(message);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlloader = new FXMLLoader(FenetreClient.class.getResource("FenetreCLient.fxml"));
         Scene scene = new Scene(fxmlloader.load());
+        controller = fxmlloader.getController();
 
         stage.setTitle("ChatClient");
         stage.setScene(scene);
         stage.show();
+        cpt = new ClientPrintThread(echoSocket,this);
+        listeningthread= new Thread(cpt);
+        listeningthread.setDaemon(true);
+        listeningthread.start();
+    }
+
+    public static void startListen() {
+        cpt.enabledrecord();
     }
 
     public static void main(String[] args) throws IOException {
-        Socket echoSocket = null;
-        PrintStream socOut = null;
-        BufferedReader stdIn = null;
 
         if (args.length != 2) {
             System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -50,19 +70,18 @@ public class FenetreClient extends Application {
             System.exit(1);
         }
 
-        String line;
-        ClientPrintThread cpt = new ClientPrintThread(echoSocket);
-        cpt.start();
 
-        while (true) {
-            line=stdIn.readLine();
-            socOut.println(line);
-            if (line.equals(".")) break;
-        }
-        socOut.close();
-        stdIn.close();
-        echoSocket.close();
+
+        String line;
 
         launch();
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("msgreceive");
+        controller.recieveMessage((String) arg);
+
     }
 }

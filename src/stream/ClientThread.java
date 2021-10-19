@@ -36,18 +36,17 @@ public class ClientThread extends Thread {
 			socOut.println("Bienvenue, " + username + ".");
 			socOut.println("Entrez votre idSalle :");
 			idSalle = socIn.readLine();
-			socOut.println("Vous \u00EAtes dans la salle : " + idSalle + ".");
 			tm.addUser(clientSocket, username, idSalle);
 			if (!(tm.getAncienMessages(idSalle) == null)) {
-				socOut.println("\n Anciens messages:");
+				socOut.println("\n OLD MESSAGES:");
 				socOut.println(tm.getAncienMessages(idSalle));
-				socOut.println("\n Nouveaux messages:");
+				socOut.println("\n \n NEW MESSAGES:");
 			}
 
     		while (true) {
     		    String line = socIn.readLine();
 			    if (line.equals(".")) { tm.rmUser(username); break; }
-			    tm.write(username + ": " + line, username);
+			    tm.write(line, username);
     		}
 			socIn.close();
 			clientSocket.close();
