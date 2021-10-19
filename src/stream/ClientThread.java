@@ -38,7 +38,12 @@ public class ClientThread extends Thread {
 			idSalle = socIn.readLine();
 			socOut.println("Vous \u00EAtes dans la salle : " + idSalle + ".");
 			tm.addUser(clientSocket, username, idSalle);
-			
+			if (!(tm.getAncienMessages(idSalle) == null)) {
+				socOut.println("\n Anciens messages:");
+				socOut.println(tm.getAncienMessages(idSalle));
+				socOut.println("\n Nouveaux messages:");
+			}
+
     		while (true) {
     		    String line = socIn.readLine();
 			    if (line.equals(".")) { tm.rmUser(username); break; }

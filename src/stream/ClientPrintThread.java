@@ -6,7 +6,7 @@ import java.net.*;
 public class ClientPrintThread extends Thread {
 	private Socket clientSocket;
 	
-	ClientPrintThread(Socket s) {
+	public ClientPrintThread(Socket s) {
 		clientSocket = s;
 	}
 	

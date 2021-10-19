@@ -9,15 +9,32 @@ public class ThreadManager {
 	// private ArrayList<Socket> utilisateurs;
 	private HashMap<String,Socket> utilisateurs;
 	private HashMap<String,String> salles;
+	private HashMap<String, String> anciensMessages;
 	
 	ThreadManager() {
 		pendingMessages = new ArrayList<String>();
 		utilisateurs = new HashMap<String,Socket>();
 		salles = new HashMap<String, String>();
+		anciensMessages = new HashMap<>();
 	}
-	
+
+	public String getAncienMessages(String idSalle) {
+		return anciensMessages.get(idSalle);
+	}
+
 	public void write(String s, String username) {
+		if (!(anciensMessages.get(salles.get(username)) == null)) {
+			String text = (anciensMessages.get(salles.get(username)));
+			text += s + "\n";
+			anciensMessages.replace(salles.get(username),text);
+		}
+		else {
+			String text = s + "\n";
+			anciensMessages.put(salles.get(username),text);
+		}
+
 		pendingMessages.add(s);
+
 		try {
 			for(String usr : utilisateurs.keySet()) {
 				if(Objects.equals(usr, username)) continue;
