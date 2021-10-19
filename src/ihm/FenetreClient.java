@@ -32,9 +32,14 @@ public class FenetreClient extends Application implements Observer {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         FXMLLoader fxmlloader = new FXMLLoader(FenetreClient.class.getResource("FenetreCLient.fxml"));
-        Scene scene = new Scene(fxmlloader.load());
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlloader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         controller = fxmlloader.getController();
 
         stage.setTitle("ChatClient");
@@ -50,7 +55,7 @@ public class FenetreClient extends Application implements Observer {
         cpt.enabledrecord();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         if (args.length != 2) {
             System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -83,5 +88,9 @@ public class FenetreClient extends Application implements Observer {
         System.out.println("msgreceive");
         controller.recieveMessage((String) arg);
 
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 }

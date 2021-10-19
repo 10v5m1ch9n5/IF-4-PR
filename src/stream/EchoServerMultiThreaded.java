@@ -17,7 +17,7 @@ public class EchoServerMultiThreaded  {
 	* @param EchoServer port
   	* 
   	**/
-    public static void main(String args[]){ 
+    public static void main(String args[]) throws IOException {
 		ServerSocket listenSocket;
 		ThreadManager tm = new ThreadManager();
         

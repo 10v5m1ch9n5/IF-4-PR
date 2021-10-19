@@ -10,19 +10,40 @@ public class ThreadManager {
 	private HashMap<String,Socket> utilisateurs;
 	private HashMap<String,String> salles;
 	private HashMap<String, String> anciensMessages;
-	
-	ThreadManager() {
+	final static String filepath = "src/stream/anciensMessages.txt";
+
+	ThreadManager() throws IOException {
 		pendingMessages = new ArrayList<String>();
 		utilisateurs = new HashMap<String,Socket>();
 		salles = new HashMap<String, String>();
 		anciensMessages = new HashMap<>();
+		anciensMessages = reloadMessagesFromFile();
+
+	}
+
+	private HashMap<String, String> reloadMessagesFromFile() throws IOException {
+		HashMap<String, String> reload = new HashMap<>();
+		File file = new File(filepath);
+		BufferedReader bufferdReader = new BufferedReader(new FileReader(file));
+
+		String line = null;
+
+		while ((line = bufferdReader.readLine()) != null) {
+			String[] split = line.split(";");
+			String idSalle = split[0].trim();
+			String messages = split[1].trim();
+			if (!idSalle.equals("") && !messages.equals("")) {
+				anciensMessages.put(idSalle,messages.replace("%%%","\n"));
+			}
+		}
+		return anciensMessages;
 	}
 
 	public String getAncienMessages(String idSalle) {
 		return anciensMessages.get(idSalle);
 	}
 
-	public void write(String s, String username) {
+	public void write(String s, String username) throws IOException {
 		if (!(anciensMessages.get(salles.get(username)) == null)) {
 			String text = (anciensMessages.get(salles.get(username)));
 			text += s + "\n";
@@ -32,6 +53,7 @@ public class ThreadManager {
 			String text = s + "\n";
 			anciensMessages.put(salles.get(username),text);
 		}
+		saveMessagesInFile(anciensMessages);
 
 		pendingMessages.add(s);
 
@@ -47,7 +69,18 @@ public class ThreadManager {
 			System.err.println(e);
 		}
 	}
-	
+
+	private void saveMessagesInFile(HashMap<String, String> anciensMessages) throws IOException {
+		File file = new File(filepath);
+		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+		for (Map.Entry<String, String> entry : anciensMessages.entrySet()) {
+			bufferedWriter.write(entry.getKey() + ";" + entry.getValue().replace("\n","%%%"));
+			bufferedWriter.newLine();
+		}
+		bufferedWriter.flush();
+		bufferedWriter.close();
+	}
+
 	public boolean newMessages() {
 		return !pendingMessages.isEmpty();
 	}

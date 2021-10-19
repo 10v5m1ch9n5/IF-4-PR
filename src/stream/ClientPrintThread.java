@@ -11,8 +11,10 @@ import java.util.Observer;
 public class ClientPrintThread extends Observable implements Runnable {
 	private Socket clientSocket;
 	private Boolean recording;
+	private FenetreClient app;
 	
 	public ClientPrintThread(Socket s, FenetreClient app) {
+		this.app = app;
 		addObserver(app);
 		clientSocket = s;
 		recording = false;
@@ -36,6 +38,12 @@ public class ClientPrintThread extends Observable implements Runnable {
 			}
 		} catch(Exception e) {
 			System.err.println(e);
+			System.out.println("Closing ChatClient...");
+			try {
+				app.exit();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
