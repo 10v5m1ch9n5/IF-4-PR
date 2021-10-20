@@ -95,6 +95,8 @@ public class FenetreClientController {
         FenetreClient.startListen();
 
         recievedMessagesTextbox.setText("");
+
+        recievedMessagesTextbox.setWrapText(true);
     }
 
     @FXML
