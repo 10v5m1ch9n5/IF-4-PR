@@ -1,12 +1,10 @@
 package stream;
 
 import ihm.FenetreClient;
-import javafx.application.Application;
 
 import java.io.*;
 import java.net.*;
 import java.util.Observable;
-import java.util.Observer;
 
 public class ClientPrintThread extends Observable implements Runnable {
 	private Socket clientSocket;
@@ -46,5 +44,4 @@ public class ClientPrintThread extends Observable implements Runnable {
 			}
 		}
 	}
-
 }

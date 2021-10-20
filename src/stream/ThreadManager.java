@@ -6,70 +6,66 @@ import java.util.*;
 
 public class ThreadManager {
 	private ArrayList<String> pendingMessages;
-	// private ArrayList<Socket> utilisateurs;
 	private HashMap<String,Socket> utilisateurs;
 	private HashMap<String,String> salles;
 	private HashMap<String, String> anciensMessages;
 	final static String filepath = "src/stream/anciensMessages.txt";
 
 	ThreadManager() throws IOException {
-		pendingMessages = new ArrayList<String>();
-		utilisateurs = new HashMap<String,Socket>();
-		salles = new HashMap<String, String>();
+		pendingMessages = new ArrayList<>();
+		utilisateurs = new HashMap<>();
+		salles = new HashMap<>();
 		anciensMessages = new HashMap<>();
 		anciensMessages = reloadMessagesFromFile();
 
 	}
 
-	private HashMap<String, String> reloadMessagesFromFile() throws IOException {
-		HashMap<String, String> reload = new HashMap<>();
-		File file = new File(filepath);
-		BufferedReader bufferdReader = new BufferedReader(new FileReader(file));
-
-		String line = null;
-
-		while ((line = bufferdReader.readLine()) != null) {
-			String[] split = line.split(";");
-			String idSalle = split[0].trim();
-			String messages = split[1].trim();
-			if (!idSalle.equals("") && !messages.equals("")) {
-				anciensMessages.put(idSalle,messages.replace("%%%","\n"));
-			}
-		}
-		return anciensMessages;
-	}
-
+	/**
+	 * loads messages that already have been sent before a user entered a chatroom
+	 * @param idSalle the id of the chatroom
+	 **/
 	public String getAncienMessages(String idSalle) {
 		return anciensMessages.get(idSalle);
 	}
 
-	public void write(String s, String username) throws IOException {
+	/**
+	 * forwarding sent message to other users in the same chatroom
+	 * @param message that is sent
+	 * @param username of the sender
+	 **/
+	public void write(String message, String username) throws IOException {
+		//store message in HashMap ancienMessages with id of chatroom as key
 		if (!(anciensMessages.get(salles.get(username)) == null)) {
 			String text = (anciensMessages.get(salles.get(username)));
-			text += s + "\n";
+			text += message + "\n";
 			anciensMessages.replace(salles.get(username),text);
 		}
 		else {
-			String text = s + "\n";
+			String text = message + "\n";
 			anciensMessages.put(salles.get(username),text);
 		}
 		saveMessagesInFile(anciensMessages);
 
-		pendingMessages.add(s);
+		pendingMessages.add(message);
 
+		// forward message to other users in the same chatroom
 		try {
 			for(String usr : utilisateurs.keySet()) {
 				if(Objects.equals(usr, username)) continue;
 				if (!salles.get(username).equals(salles.get(usr))) continue;
 				System.out.println("Envoi à " + usr);
 				PrintStream socOut = new PrintStream(utilisateurs.get(usr).getOutputStream());
-				socOut.println(s);
+				socOut.println(message);
 			}
 		} catch(Exception e) {
 			System.err.println(e);
 		}
 	}
 
+	/**
+	 * store send messages in file for persistence
+	 * @param anciensMessages the Map where the messages are stored with id of chatroom as key
+	 **/
 	private void saveMessagesInFile(HashMap<String, String> anciensMessages) throws IOException {
 		File file = new File(filepath);
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -81,8 +77,24 @@ public class ThreadManager {
 		bufferedWriter.close();
 	}
 
-	public boolean newMessages() {
-		return !pendingMessages.isEmpty();
+	/**
+	 * reloads old messages from file into HashMap ancien messages
+	 * @return anciensMessages the HashMap of already sent messages with chatroom id as key
+	 **/
+	private HashMap<String, String> reloadMessagesFromFile() throws IOException {
+		File file = new File(filepath);
+		BufferedReader bufferdReader = new BufferedReader(new FileReader(file));
+
+		String line;
+		while ((line = bufferdReader.readLine()) != null) {
+			String[] split = line.split(";");
+			String idSalle = split[0].trim();
+			String messages = split[1].trim();
+			if (!idSalle.equals("") && !messages.equals("")) {
+				anciensMessages.put(idSalle,messages.replace("%%%","\n"));
+			}
+		}
+		return anciensMessages;
 	}
 	
 	public void addUser(Socket s, String username, String idSalle) {
@@ -94,9 +106,4 @@ public class ThreadManager {
 		utilisateurs.remove(username);
 		salles.remove(username);
 	}
-	
-	public String getMessage() {
-		return pendingMessages.get(pendingMessages.size()-1);
-	}
-	
 }

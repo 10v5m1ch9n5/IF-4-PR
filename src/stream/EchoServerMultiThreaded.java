@@ -14,6 +14,7 @@ public class EchoServerMultiThreaded  {
   
  	/**
   	* main method
+	* starts server, waits for clients to connect
 	* @param EchoServer port
   	* 
   	**/

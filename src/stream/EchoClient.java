@@ -26,7 +26,6 @@ public class EchoClient implements Observer {
         Socket echoSocket = null;
         PrintStream socOut = null;
         BufferedReader stdIn = null;
-        String msg = "";
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -47,8 +46,6 @@ public class EchoClient implements Observer {
         }
                              
         String line;
-		//ClientPrintThread cpt = new ClientPrintThread(echoSocket);
-		//cpt.start();
 		
         while (true) {
         	line=stdIn.readLine();

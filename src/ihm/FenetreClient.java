@@ -15,8 +15,6 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
 
-import stream.ClientPrintThread;
-
 public class FenetreClient extends Application implements Observer {
 
     public static Socket echoSocket = null;
@@ -74,20 +72,13 @@ public class FenetreClient extends Application implements Observer {
             System.err.println("Couldn't get I/O for " + "the connection to:"+ args[0]);
             System.exit(1);
         }
-
-
-
-        String line;
-
         launch();
-
     }
 
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("msgreceive");
         controller.recieveMessage((String) arg);
-
     }
 
     public void exit() {
