@@ -100,9 +100,11 @@ public class FenetreClientController {
     @FXML
     protected void sendMessage() {
         String message = sendMessagesTextbox.getText();
-        sendMessagesTextbox.setText("");
-        recievedMessagesTextbox.appendText( userNameVariable.getText() + ": "+ message + "\n");
-        FenetreClient.sendMessage(userNameVariable.getText() + ": "+ message + "\n");
+        if(!message.equals("")) {
+            sendMessagesTextbox.setText("");
+            recievedMessagesTextbox.appendText( userNameVariable.getText() + ": "+ message + "\n");
+            FenetreClient.sendMessage(userNameVariable.getText() + ": "+ message + "\n");
+        }
     }
 
     public void recieveMessage(String message) {
